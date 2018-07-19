@@ -114,7 +114,16 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
 
         DispatchQueue.main.async {
-            print("\(bestResult.identifier) - \(bestResult.confidence)")
+            self.text.text = "\(bestResult.identifier) - \(bestResult.confidence)"
+        }
+    }
+
+    func deleteRectangles () {
+        if let foundView = view.viewWithTag(8) {
+            foundView.removeFromSuperview()
+            deleteRectangles()
+        } else {
+            return
         }
     }
 
@@ -151,7 +160,8 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
-
+        deleteRectangles()
+        /*
         var existRectangles = true
         while existRectangles {
             if let foundView = view.viewWithTag(8) {
@@ -160,6 +170,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
                 existRectangles = false
             }
         }
+        */
     }
 
 }
