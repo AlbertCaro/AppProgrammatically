@@ -70,7 +70,18 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     func handleFaces(resquest: VNRequest, error: Error?) {
+        guard let observations = resquest.results as? [VNFaceObservation] else {
+            print("Resultado inesperado.")
+            return
+        }
 
+        DispatchQueue.main.async {
+            self.handleFaces(observations: observations)
+        }
+    }
+
+    func handleFaces(observations: [VNFaceObservation]) {
+        text.text = "Se detectaron \(observations.count) rostro(s)."
     }
 
     @objc func clicked() {
@@ -88,7 +99,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
             do {
                 try handler.perform([faceRequest])
             } catch {
-                print("Error de manejo de visión")
+                print("Error de manejo de visión.")
             }
         }
     }
