@@ -35,7 +35,7 @@ class UDGViewController: UIViewController {
         text.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         text.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.centerYAnchor.constraint(equalTo: text.centerYAnchor, constant: 8.0).isActive = true
+        button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 8).isActive = true
     }
 
 
