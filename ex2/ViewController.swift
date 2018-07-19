@@ -51,6 +51,8 @@ class UDGViewController: UIViewController {
         button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 8).isActive = true
         image.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -20).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
 
 
