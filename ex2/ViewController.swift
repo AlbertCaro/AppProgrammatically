@@ -40,6 +40,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pickImage))
         view.backgroundColor = UIColor.white
+
         view.addSubview(text)
         view.addSubview(button)
         view.addSubview(image)
@@ -63,5 +64,13 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            self.image.image = selectedImage
+            dismiss(animated: true)
+        }
+
     }
 }
