@@ -57,6 +57,10 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         image.widthAnchor.constraint(equalToConstant: 200).isActive = true
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+
+    }
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         if let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
             self.image.image = selectedImage
@@ -65,12 +69,21 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    func handleFaces(resquest: VNRequest, error: Error?) {
 
     }
 
     @objc func clicked() {
-        print("Click")
+        // Paso 1
+        guard let cgImage = image.image?.cgImage else {
+            return
+        }
+        // Paso 2
+        let orientation = CGImagePropertyOrientation(rawValue: UInt32(image.image!.imageOrientation.rawValue))
+
+        // Paso 3
+        let faceRequest = VNDetectFaceRectanglesRequest(completionHandler: handleFaces)
+        let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation!)
     }
 
     @objc func pickImage() {
