@@ -11,9 +11,31 @@ import UIKit
 
 class UDGViewController: UIViewController {
 
+    let text: UILabel = {
+        var label = UILabel()
+        label.text = "Hola CUValles"
+        label.font = UIFont(name: "Arial", size: 40.0)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    let button: UIButton = {
+        var button = UIButton(type: .system)
+        button.setTitle("Click", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.red
+        view.addSubview(text)
+        view.addSubview(button)
+
+        text.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        text.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: text.centerYAnchor, constant: 8.0).isActive = true
     }
 
 
