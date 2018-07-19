@@ -31,6 +31,8 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let image = UIImageView()
         image.image = UIImage(named: "unknow")
         image.translatesAutoresizingMaskIntoConstraints = false
+        image.layer.cornerRadius = 50.0
+        image.clipsToBounds = true
         return image
     }()
 
@@ -57,6 +59,9 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     @objc func pickImage() {
-
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true, completion: nil)
     }
 }
