@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Vision
+import ImageIO
 
 
 class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -21,7 +23,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
     let button: UIButton = {
         var button = UIButton(type: .system)
-        button.setTitle("Click", for: .normal)
+        button.setTitle("Detectar rostros", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
         return button
@@ -31,7 +33,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let image = UIImageView()
         image.image = UIImage(named: "unknow")
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 50.0
+        image.layer.cornerRadius = 20.0
         image.clipsToBounds = true
         return image
     }()
@@ -51,8 +53,20 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 8).isActive = true
         image.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -20).isActive = true
-        image.heightAnchor.constraint(equalToConstant: 150).isActive = true
-        image.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        image.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        image.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        if let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            self.image.image = selectedImage
+            dismiss(animated: true)
+        }
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+
     }
 
     @objc func clicked() {
@@ -66,11 +80,4 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         present(picker, animated: true, completion: nil)
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        if let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
-            self.image.image = selectedImage
-            dismiss(animated: true)
-        }
-
-    }
 }
