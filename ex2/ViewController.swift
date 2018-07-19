@@ -27,6 +27,13 @@ class UDGViewController: UIViewController {
         return button
     }()
 
+    let image: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "unknow")
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+
     @objc func clicked() {
         print("Click")
     }
@@ -36,11 +43,14 @@ class UDGViewController: UIViewController {
         view.backgroundColor = UIColor.red
         view.addSubview(text)
         view.addSubview(button)
+        view.addSubview(image)
 
         text.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         text.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 8).isActive = true
+        image.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -20).isActive = true
     }
 
 
