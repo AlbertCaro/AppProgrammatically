@@ -16,7 +16,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     let text: UILabel = {
         var label = UILabel()
         label.text = "Hola CUValles"
-        label.font = UIFont(name: "Arial", size: 40.0)
+        label.font = UIFont(name: "Arial", size: 30.0)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -33,7 +33,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let image = UIImageView()
         image.image = UIImage(named: "unknow")
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 20.0
+        image.layer.cornerRadius = 15.0
         image.clipsToBounds = true
         return image
     }()
@@ -81,7 +81,18 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
     }
 
     func handleFaces(observations: [VNFaceObservation]) {
-        text.text = "Se detectaron \(observations.count) rostro(s)."
+        text.text = "Hay \(observations.count) rostro(s)."
+
+        for face in observations {
+            let boxOne = face.boundingBox
+            let boxTwo = image.bounds
+
+            let width = boxOne.size.width * boxTwo.width
+            let height = boxOne.size.height * boxTwo.height
+
+            let x = boxOne.origin.x * boxTwo.width
+            let y = abs((boxOne.origin.y * boxTwo.height) - boxTwo.height) - height
+        }
     }
 
     @objc func clicked() {
