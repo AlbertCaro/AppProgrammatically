@@ -9,7 +9,7 @@
 import UIKit
 
 
-class UDGViewController: UIViewController {
+class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let text: UILabel = {
         var label = UILabel()
@@ -34,13 +34,10 @@ class UDGViewController: UIViewController {
         return image
     }()
 
-    @objc func clicked() {
-        print("Click")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.red
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(pickImage))
+        view.backgroundColor = UIColor.white
         view.addSubview(text)
         view.addSubview(button)
         view.addSubview(image)
@@ -55,5 +52,11 @@ class UDGViewController: UIViewController {
         image.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
 
+    @objc func clicked() {
+        print("Click")
+    }
 
+    @objc func pickImage() {
+
+    }
 }
