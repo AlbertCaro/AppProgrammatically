@@ -92,6 +92,13 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
 
             let x = boxOne.origin.x * boxTwo.width
             let y = abs((boxOne.origin.y * boxTwo.height) - boxTwo.height) - height
+
+            let subView = UIView(frame: CGRect(x: x, y: y, width: width, height: height))
+
+            subView.layer.borderColor = UIColor.red.cgColor
+            subView.layer.borderWidth = 2.0
+            subView.tag = 8
+            image.addSubview(subView)
         }
     }
 
