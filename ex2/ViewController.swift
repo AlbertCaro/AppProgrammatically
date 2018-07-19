@@ -84,6 +84,13 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         // Paso 3
         let faceRequest = VNDetectFaceRectanglesRequest(completionHandler: handleFaces)
         let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation!)
+        DispatchQueue.global(qos: .userInteractive).async {
+            do {
+                try handler.perform([faceRequest])
+            } catch {
+                print("Error de manejo de visión")
+            }
+        }
     }
 
     @objc func pickImage() {
