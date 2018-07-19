@@ -12,16 +12,9 @@ import UIKit
 class UDGViewController: UIViewController {
 
     override func viewDidLoad() {
-    super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.red
     }
-
-
-    override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-    }
-
 
 
 }
