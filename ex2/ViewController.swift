@@ -118,13 +118,22 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
     }
 
+    /*
     func deleteRectangles () {
         if let foundView = view.viewWithTag(8) {
             foundView.removeFromSuperview()
             deleteRectangles()
-        } else {
+        }
+        return
+    }
+    */
+
+    func deleteRectangles() {
+        guard let foundView = view.viewWithTag(8) else {
             return
         }
+        foundView.removeFromSuperview()
+        deleteRectangles()
     }
 
     @objc func clicked() {
