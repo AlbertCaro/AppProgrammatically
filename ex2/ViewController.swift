@@ -102,7 +102,31 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         }
     }
 
+    func handlePlaces(request: VNRequest, error: Error?) {
+        guard let observations = request.results as? [VNClassificationObservation] else {
+            print("Error inesperado para VNCoreMLRequest")
+            return
+        }
+
+        guard let bestResult = observations.first else {
+            print("No hay clasificación válida")
+            return
+        }
+
+        DispatchQueue.main.async {
+            print("\(bestResult.identifier) - \(bestResult.confidence)")
+        }
+    }
+
     @objc func clicked() {
+        let leNetPlaces = GoogLeNetPlaces()
+        var test: VNRequest!
+
+        if let model = try? VNCoreMLModel(for: leNetPlaces.model) {
+            let mlRequest = VNCoreMLRequest(model: model, completionHandler: handlePlaces)
+            test = mlRequest
+        }
+
         // Paso 1
         guard let cgImage = image.image?.cgImage else {
             return
@@ -115,7 +139,7 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation!)
         DispatchQueue.global(qos: .userInteractive).async {
             do {
-                try handler.perform([faceRequest])
+                try handler.perform([faceRequest, test])
             } catch {
                 print("Error de manejo de visión.")
             }
@@ -127,6 +151,15 @@ class UDGViewController: UIViewController, UIImagePickerControllerDelegate, UINa
         picker.delegate = self
         picker.sourceType = .photoLibrary
         present(picker, animated: true, completion: nil)
+
+        var existRectangles = true
+        while existRectangles {
+            if let foundView = view.viewWithTag(8) {
+                foundView.removeFromSuperview()
+            } else {
+                existRectangles = false
+            }
+        }
     }
 
 }
