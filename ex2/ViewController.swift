@@ -23,8 +23,13 @@ class UDGViewController: UIViewController {
         var button = UIButton(type: .system)
         button.setTitle("Click", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(clicked), for: .touchUpInside)
         return button
     }()
+
+    @objc func clicked() {
+        print("Click")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
